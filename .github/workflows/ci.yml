@@ -1,0 +1,14 @@
+name: CI Build and Test
+
+on: [push, pull_request]
+
+jobs:
+  test-router:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Compile and Run Unit Tests
+        run: |
+          gcc -Wall -Wextra -IInc Src/stm32c5_fdcan_anti_inversion.c tests/test_fdcan_router.c -o test_runner
+          ./test_runner
